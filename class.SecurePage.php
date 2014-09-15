@@ -26,6 +26,9 @@ class SecurePage extends FlipPage
 
         $css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'/css/bootstrap-theme.min.css', 'type'=>'text/css'), true);
         $this->add_head_tag($css_tag);
+
+        $meta_tag = $this->create_open_tag('meta', array('name'=>'viewport', 'content'=>'width=device-width, initial-scale=1'), true);
+        $this->add_head_tag($meta_tag);
     }
 
     function add_sites()
@@ -96,6 +99,7 @@ class SecurePage extends FlipPage
                                         <form id="login_dialog_form" role="form">
                                             <input class="form-control" type="text" name="username" placeholder="Username or Email" required autofocus/>
                                             <input class="form-control" type="password" name="password" placeholder="Password" required/>
+                                            <input type="hidden" name="return" value="'.$this->current_url().'"/>
                                             <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
                                         </form>
                                     </div>
