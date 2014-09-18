@@ -21,7 +21,11 @@ class SecurePage extends FlipPage
         $css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'/css/jquery-ui.css', 'type'=>'text/css'), true);
         $this->add_head_tag($css_tag);
 
+        //$css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'/css/bootstrap.css', 'type'=>'text/css'), true);
         $css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'/css/bootstrap.min.css', 'type'=>'text/css'), true);
+        $this->add_head_tag($css_tag);
+
+        $css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'/css/bootstrap-formhelpers.min.css', 'type'=>'text/css'), true);
         $this->add_head_tag($css_tag);
 
         $css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'/css/bootstrap-theme.min.css', 'type'=>'text/css'), true);
@@ -59,7 +63,7 @@ class SecurePage extends FlipPage
         }
         $about_menu = array(
             'Burning Flipside'=>'http://www.burningflipside.com/about/event',
-            'AAR, LLC'=>'http://www.burningflipside.com/about/aar',
+            'AAR, LLC'=>'http://www.burningflipside.com/LLC',
             'Privacy Policy'=>'http://www.burningflipside.com/about/privacy'
         );
         $this->add_link('About', 'http://www.burningflipside.com/about', $about_menu);
@@ -67,15 +71,10 @@ class SecurePage extends FlipPage
 
     function add_script()
     {
-        $script_start_tag = $this->create_open_tag('script', array('src'=>'/js/jquery.validate.js'));
-        $script_close_tag = $this->create_close_tag('script');
-        $this->add_head_tag($script_start_tag.$script_close_tag);
-
-        $script_start_tag = $this->create_open_tag('script', array('src'=>'/js/bootstrap.min.js'));
-        $this->add_head_tag($script_start_tag.$script_close_tag);
-
-        $script_start_tag = $this->create_open_tag('script', array('src'=>'/js/login.js'));
-        $this->add_head_tag($script_start_tag.$script_close_tag);
+        $this->add_js_from_src('/js/jquery.validate.js');
+        $this->add_js_from_src('/js/bootstrap.min.js');
+        $this->add_js_from_src('/js/bootstrap-formhelpers.js');
+        $this->add_js_from_src('/js/login.js');
     }
 
     function current_url()

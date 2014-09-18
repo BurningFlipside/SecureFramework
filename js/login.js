@@ -28,10 +28,17 @@ function login_submitted(form)
 function do_login_init()
 {
     var login_link = $(".links a[href*='login']");
-    login_link.attr('data-toggle','modal');
-    login_link.attr('data-target','#login-dialog');
-    login_link.removeAttr('href');
-    login_link.css('cursor', 'pointer');
+    if(browser_supports_cors())
+    {
+        login_link.attr('data-toggle','modal');
+        login_link.attr('data-target','#login-dialog');
+        login_link.removeAttr('href');
+        login_link.css('cursor', 'pointer');
+    }
+    else
+    {
+        login_link.attr('href', login_link.attr('href')+'?return='+document.URL);
+    }
     if($('#login_main_form').length > 0)
     {
         $("#login_main_form").validate({
