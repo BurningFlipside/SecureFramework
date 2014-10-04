@@ -55,8 +55,7 @@ class SecurePage extends FlipPage
         else
         {
             $secure_menu = array(
-                'Ticket Registration'=>'/tickets/index.php',
-                'Ticket Transfer'=>'/tickets/transfer.php',
+                'Tickets'=>'/tickets/index.php',
                 'Theme Camp Registration'=>'/theme_camp/registration.php',
                 'Art Project Registration'=>'/art/registration.php',
                 'Event Registration'=>'/event/index.php'
@@ -75,7 +74,6 @@ class SecurePage extends FlipPage
     function add_script()
     {
         $this->add_js_from_src('/js/jquery.validate.js');
-        $this->add_js_from_src('/js/bootstrap.min.js');
         $this->add_js_from_src('/js/bootstrap-formhelpers.min.js');
         $this->add_js_from_src('/js/bootstrap-switch.min.js');
         $this->add_js_from_src('/js/login.js');
@@ -88,7 +86,7 @@ class SecurePage extends FlipPage
 
     function add_login_form()
     {
-        $this->body .= '<div class="modal fade" role="dialog" id="login-dialog" title="Login" aria-hidden="true">
+        $this->body .= '<div class="modal fade" tabindex="-1" role="dialog" id="login-dialog" title="Login" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
