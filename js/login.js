@@ -42,16 +42,18 @@ function do_login_init()
     if($('#login_main_form').length > 0)
     {
         $("#login_main_form").validate({
-            debug: true,
             submitHandler: login_submitted
         });
     }
     if($('#login_dialog_form').length > 0)
     {
         $("#login_dialog_form").validate({
-            debug: true,
             submitHandler: login_submitted
         });
+    }
+    if($('#login-dialog').length > 0)
+    {
+        $('#login-dialog').modal({show: false, backdrop: 'static'});
     }
 }
 
