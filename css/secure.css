@@ -28,6 +28,10 @@
     font-weight: bold;
 }
 
+.action-buttons {
+    white-space: nowrap;
+}
+
 @media screen and (max-width: 40.5em) {
     #content { margin: 10px 10px 0 10px }
 }
