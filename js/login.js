@@ -2,8 +2,14 @@ function login_submit_done(data)
 {
     if(data.error)
     {
-         alert('Login failed: '+data.error);
-         console.log(data.error);
+         var failed = getParameterByName('failed')*1;
+         var return_val = window.location;
+         failed++;
+         if(data.return)
+         {
+             return_val = data.return;
+         }
+         window.location = 'https://profiles.burningflipside.com/login.php?failed='+failed+'&return='+return_val;
     }
     else
     {
