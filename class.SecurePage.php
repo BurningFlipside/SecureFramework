@@ -18,11 +18,9 @@ class SecurePage extends FlipPage
         $css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'/css/secure.css', 'type'=>'text/css'), true);
         $this->add_head_tag($css_tag);
 
-        $css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'/css/jquery-ui.css', 'type'=>'text/css'), true);
-        $this->add_head_tag($css_tag);
+        $this->add_css_from_src('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.min.css');
 
-        //$css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'/css/bootstrap.css', 'type'=>'text/css'), true);
-        $css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'/css/bootstrap.min.css', 'type'=>'text/css'), true);
+        $css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css', 'type'=>'text/css'), true);
         $this->add_head_tag($css_tag);
 
         $css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'/css/bootstrap-formhelpers.min.css', 'type'=>'text/css'), true);
@@ -50,15 +48,17 @@ class SecurePage extends FlipPage
     {
         if(!FlipSession::is_logged_in())
         {
-            $this->add_link('Login', 'http://profiles.burningflipside.com/login.php');
+            $this->add_link('Login', 'http://profiles.burningflipside.com/login.php?return='.$this->current_url());
         }
         else
         {
             $secure_menu = array(
                 'Tickets'=>'/tickets/index.php',
-                'Theme Camp Registration'=>'/theme_camp/registration.php',
-                'Art Project Registration'=>'/art/registration.php',
-                'Event Registration'=>'/event/index.php'
+                'View Registrations'=>'/register/view.php',
+                'Theme Camp Registration'=>'/register/tc_reg.php',
+                'Art Project Registration'=>'/register/art_reg.php',
+                'Art Car Registration'=>'/register/artCar_reg.php',
+                'Event Registration'=>'/register/event_reg.php'
             );
             $this->add_link('Secure', 'https://secure.burningflipside.com/', $secure_menu);
             $this->add_link('Logout', 'http://profiles.burningflipside.com/logout.php');
@@ -73,15 +73,15 @@ class SecurePage extends FlipPage
 
     function add_script()
     {
-        $this->add_js_from_src('/js/jquery.validate.js');
+        $this->add_js_from_src('/js/jquery.validate.min.js');
         $this->add_js_from_src('/js/bootstrap-formhelpers.min.js');
         $this->add_js_from_src('/js/bootstrap-switch.min.js');
-        $this->add_js_from_src('/js/login.js');
+        $this->add_js_from_src('/js/login.min.js');
     }
 
     function current_url()
     {
-        return 'http'.(isset($_SERVER['HTTPS'])?'s':'').'://'."{$_SERVER['HTTP_HOST']}/{$_SERVER['REQUEST_URI']}";
+        return 'http'.(isset($_SERVER['HTTPS'])?'s':'').'://'."{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
     }
 
     function add_login_form()

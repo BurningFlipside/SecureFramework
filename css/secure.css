@@ -38,4 +38,7 @@
 
 @media screen and (max-width: 40.5em) {
     #content { margin: 10px 10px 0 10px }
+    #content li a {
+        font-size: 24px;
+    }
 }

@@ -11,9 +11,8 @@ $page->body .= '
     <h1>What would you like to do?</h1>
     <ul>
         <li><a href="/tickets/index.php">Ticket Registration/Transfer</a></li>
-        <li><a href="/theme_camp/registration.php">Theme Camp Registration</a></li>
-        <li><a href="/art/registration.php">Art Project Registration</a></li>
-        <li><a href="/event/index.php">Event Registration</a></li>
+        <li><a href="/register/index.php">Theme Camp, Art Project, Art Car, and Event Registration</a></li>
+        <li><a href="/register/view.php">View Existing Registrations</a></li>
         <li><a href="/fvs/index.php">Flipside Volunteer System</a></li>
     </ul>
 </div>';

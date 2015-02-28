@@ -31,6 +31,11 @@ function login_submitted(form)
         success: login_submit_done});
 }
 
+function login_dialog_shown()
+{
+    $('[name=username]').focus();
+}
+
 function do_login_init()
 {
     var login_link = $(".links a[href*='login']");
@@ -60,6 +65,7 @@ function do_login_init()
     if($('#login-dialog').length > 0)
     {
         $('#login-dialog').modal({show: false, backdrop: 'static'});
+        $('#login-dialog').on('shown.bs.modal', login_dialog_shown);
     }
 }
 
