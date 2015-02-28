@@ -10,10 +10,10 @@ $page->body .= '
     <p>This system allows you to register for tickets, transfer tickets, register your theme camp or art project, etc..</p>
     <h1>What would you like to do?</h1>
     <ul>
-        <li><a href="/tickets/index.php">Ticket Registration/Transfer</a></li>
-        <li><a href="/register/index.php">Theme Camp, Art Project, Art Car, and Event Registration</a></li>
-        <li><a href="/register/view.php">View Existing Registrations</a></li>
-        <li><a href="/fvs/index.php">Flipside Volunteer System</a></li>
+        <li><a href="'.$page->secure_root.'/tickets/index.php">Ticket Registration/Transfer</a></li>
+        <li><a href="'.$page->secure_root.'/register/index.php">Theme Camp, Art Project, Art Car, and Event Registration</a></li>
+        <li><a href="'.$page->secure_root.'/register/view.php">View Existing Registrations</a></li>
+        <li><a href="'.$page->secure_root.'/fvs/index.php">Flipside Volunteer System</a></li>
     </ul>
 </div>';
 
