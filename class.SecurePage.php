@@ -3,34 +3,29 @@ require_once('class.FlipPage.php');
 require_once('class.FlipSession.php');
 class SecurePage extends FlipPage
 {
+    public $secure_root;
+
     function __construct($title)
     {
         parent::__construct($title, true);
-        $this->add_css();
-        $this->add_script();
+        $root = $_SERVER['DOCUMENT_ROOT'];
+        $script_dir = dirname(__FILE__);
+        $this->secure_root = substr($script_dir, strlen($root));
+        $this->add_css($this->secure_root);
+        $this->add_script($this->secure_root);
         $this->add_sites();
         $this->add_links();
         $this->add_login_form();
     }
 
-    function add_css()
+    function add_css($dir)
     {
-        $css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'/css/secure.css', 'type'=>'text/css'), true);
-        $this->add_head_tag($css_tag);
-
         $this->add_css_from_src('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.min.css');
-
-        $css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css', 'type'=>'text/css'), true);
-        $this->add_head_tag($css_tag);
-
-        $css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'/css/bootstrap-formhelpers.min.css', 'type'=>'text/css'), true);
-        $this->add_head_tag($css_tag);
-
-        $css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'/css/bootstrap-switch.min.css', 'type'=>'text/css'), true);
-        $this->add_head_tag($css_tag);
-
-        $css_tag = $this->create_open_tag('link', array('rel'=>'stylesheet', 'href'=>'/css/bootstrap-theme.min.css', 'type'=>'text/css'), true);
-        $this->add_head_tag($css_tag);
+        $this->add_css_from_src('//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css');
+        $this->add_css_from_src('//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css');
+        $this->add_css_from_src($dir.'/css/secure.css');
+        $this->add_css_from_src($dir.'/css/bootstrap-formhelpers.min.css');
+        $this->add_css_from_src($dir.'/css/bootstrap-switch.min.css');
 
         $meta_tag = $this->create_open_tag('meta', array('name'=>'viewport', 'content'=>'width=device-width, initial-scale=1'), true);
         $this->add_head_tag($meta_tag);
@@ -71,12 +66,12 @@ class SecurePage extends FlipPage
         $this->add_link('About', 'http://www.burningflipside.com/about', $about_menu);
     }
 
-    function add_script()
+    function add_script($dir)
     {
-        $this->add_js_from_src('/js/jquery.validate.min.js');
-        $this->add_js_from_src('/js/bootstrap-formhelpers.min.js');
-        $this->add_js_from_src('/js/bootstrap-switch.min.js');
-        $this->add_js_from_src('/js/login.min.js');
+        $this->add_js_from_src($dir.'/js/jquery.validate.min.js');
+        $this->add_js_from_src($dir.'/js/bootstrap-formhelpers.min.js');
+        $this->add_js_from_src($dir.'/js/bootstrap-switch.min.js');
+        $this->add_js_from_src($dir.'/js/login.min.js');
     }
 
     function current_url()
