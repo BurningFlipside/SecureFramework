@@ -26,9 +26,6 @@ class SecurePage extends FlipPage
         $this->add_css_from_src($dir.'/css/secure.css');
         $this->add_css_from_src($dir.'/css/bootstrap-formhelpers.min.css');
         $this->add_css_from_src($dir.'/css/bootstrap-switch.min.css');
-
-        $meta_tag = $this->create_open_tag('meta', array('name'=>'viewport', 'content'=>'width=device-width, initial-scale=1'), true);
-        $this->add_head_tag($meta_tag);
     }
 
     function add_sites()
@@ -71,7 +68,7 @@ class SecurePage extends FlipPage
         $this->add_js_from_src($dir.'/js/jquery.validate.min.js');
         $this->add_js_from_src($dir.'/js/bootstrap-formhelpers.min.js');
         $this->add_js_from_src($dir.'/js/bootstrap-switch.min.js');
-        $this->add_js_from_src($dir.'/js/login.min.js');
+        $this->add_js_from_src($dir.'/js/login.js');
     }
 
     function current_url()
