@@ -11,21 +11,27 @@ class SecurePage extends FlipPage
         $root = $_SERVER['DOCUMENT_ROOT'];
         $script_dir = dirname(__FILE__);
         $this->secure_root = substr($script_dir, strlen($root));
-        $this->add_css($this->secure_root);
-        $this->add_script($this->secure_root);
+        $this->add_secure_css($this->secure_root);
+        $this->add_secure_script($this->secure_root);
         $this->add_sites();
         $this->add_links();
         $this->add_login_form();
+        $this->body_tags='data-login-url="'.$this->secure_root.'/api/v1/login"';
     }
 
-    function add_css($dir)
+    function add_secure_css($dir)
     {
-        $this->add_css_from_src('//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/themes/smoothness/jquery-ui.min.css');
-        $this->add_css_from_src('//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css');
-        $this->add_css_from_src('//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css');
         $this->add_css_from_src($dir.'/css/secure.css');
-        $this->add_css_from_src($dir.'/css/bootstrap-formhelpers.min.css');
-        $this->add_css_from_src($dir.'/css/bootstrap-switch.min.css');
+        $this->add_css(CSS_BOOTSTRAP_FH);
+        $this->add_css(CSS_BOOTSTRAP_SW);
+    }
+
+    function add_secure_script($dir)
+    {
+        $this->add_js(JQUERY_VALIDATE);
+        $this->add_js(JS_BOOTSTRAP_FH);
+        $this->add_js(JS_BOOTSTRAP_SW);
+        $this->add_js(JS_LOGIN);
     }
 
     function add_sites()
@@ -61,14 +67,6 @@ class SecurePage extends FlipPage
             'Privacy Policy'=>'http://www.burningflipside.com/about/privacy'
         );
         $this->add_link('About', 'http://www.burningflipside.com/about', $about_menu);
-    }
-
-    function add_script($dir)
-    {
-        $this->add_js_from_src($dir.'/js/jquery.validate.min.js');
-        $this->add_js_from_src($dir.'/js/bootstrap-formhelpers.min.js');
-        $this->add_js_from_src($dir.'/js/bootstrap-switch.min.js');
-        $this->add_js_from_src($dir.'/js/login.js');
     }
 
     function current_url()
