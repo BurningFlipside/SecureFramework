@@ -1,12 +1,12 @@
 function login_submit_done(jqXHR)
 {
     console.log(jqXHR);
-    if(jqXHR.status == 403)
+    if(jqXHR.status != 200)
     {
         var failed = getParameterByName('failed')*1;
         var return_val = window.location;
         failed++;
-        window.location = 'https://profiles.burningflipside.com/login.php?failed='+failed+'&return='+return_val;
+        //window.location = 'https://profiles.burningflipside.com/login.php?failed='+failed+'&return='+return_val;
     }
     else
     {
@@ -56,6 +56,11 @@ function do_login_init()
     var login_link = $(".links a[href*='login']");
     if(browser_supports_cors())
     {
+        login_link.attr('data-toggle','modal');
+        login_link.attr('data-target','#login-dialog');
+        login_link.removeAttr('href');
+        login_link.css('cursor', 'pointer');
+        login_link = $("#content a[href*='login']");
         login_link.attr('data-toggle','modal');
         login_link.attr('data-target','#login-dialog');
         login_link.removeAttr('href');
