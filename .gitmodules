@@ -1,3 +1,6 @@
 [submodule "tickets"]
 	path = tickets
 	url = git@dev.burningflipside.com:pboyd/flipside-ticket-system.git
+[submodule "register"]
+	path = register
+	url = git@dev.burningflipside.com:pboyd/RegistrationSystem.git
