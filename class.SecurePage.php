@@ -11,25 +11,20 @@ class SecurePage extends FlipPage
         $root = $_SERVER['DOCUMENT_ROOT'];
         $script_dir = dirname(__FILE__);
         $this->secure_root = substr($script_dir, strlen($root));
-        $this->add_secure_css($this->secure_root);
-        $this->add_secure_script($this->secure_root);
+        $this->add_secure_css();
+        $this->add_secure_script();
         $this->add_links();
         $this->add_login_form();
         $this->body_tags='data-login-url="'.$this->secure_root.'/api/v1/login"';
     }
 
-    function add_secure_css($dir)
+    function add_secure_css()
     {
-        $this->add_css_from_src($dir.'/css/secure.css');
-        $this->add_css(CSS_BOOTSTRAP_FH);
-        $this->add_css(CSS_BOOTSTRAP_SW);
+        $this->add_css_from_src($this->secure_root.'/css/secure.css');
     }
 
-    function add_secure_script($dir)
+    function add_secure_script()
     {
-        $this->add_js(JQUERY_VALIDATE);
-        $this->add_js(JS_BOOTSTRAP_FH);
-        $this->add_js(JS_BOOTSTRAP_SW);
         $this->add_js(JS_LOGIN);
     }
 
@@ -58,36 +53,6 @@ class SecurePage extends FlipPage
             'Privacy Policy'=>'http://www.burningflipside.com/about/privacy'
         );
         $this->add_link('About', 'http://www.burningflipside.com/about', $about_menu);
-    }
-
-    function current_url()
-    {
-        return 'http'.(isset($_SERVER['HTTPS'])?'s':'').'://'."{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
-    }
-
-    function add_login_form()
-    {
-        $this->body .= '<div class="modal fade" tabindex="-1" role="dialog" id="login-dialog" title="Login" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">
-                                            <span aria-hidden="true">&times;</span>
-                                            <span class="sr-only">Close</span>
-                                        </button>
-                                        <h4 class="modal-title">Login</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <form id="login_dialog_form" role="form">
-                                            <input class="form-control" type="text" name="username" placeholder="Username or Email" required autofocus/>
-                                            <input class="form-control" type="password" name="password" placeholder="Password" required/>
-                                            <input type="hidden" name="return" value="'.$this->current_url().'"/>
-                                            <button class="btn btn-lg btn-primary btn-block" type="submit">Login</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>';
     }
 }
 ?>
