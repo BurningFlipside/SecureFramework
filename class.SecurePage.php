@@ -14,11 +14,15 @@ class SecurePage extends FlipPage
         $root = $_SERVER['DOCUMENT_ROOT'];
         $script_dir = dirname(__FILE__);
         $this->secure_root = substr($script_dir, strlen($root));
+        if($this->secure_root === false)
+        {
+            $this->secure_root = '/';
+        }
         $this->add_secure_css();
         $this->add_secure_script();
         $this->add_login_form();
         $this->body_tags='data-login-url="'.$this->secure_root.'/api/v1/login"';
-        $plugin_files = glob('*/plugin.php');
+        $plugin_files = glob($script_dir.'/*/plugin.php');
         $count = count($plugin_files);
         for($i = 0; $i < $count; $i++)
         {
@@ -38,7 +42,7 @@ class SecurePage extends FlipPage
 
     function add_secure_css()
     {
-        $this->add_css_from_src($this->secure_root.'/css/secure.css');
+        $this->add_css_from_src($this->secure_root.'css/secure.css');
     }
 
     function add_secure_script()
