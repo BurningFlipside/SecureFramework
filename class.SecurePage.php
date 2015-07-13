@@ -52,17 +52,12 @@ class SecurePage extends FlipPage
 
     function add_links()
     {
-        if(!FlipSession::is_logged_in())
+        if($this->user !== false)
         {
-            $this->add_link('Login', 'http://profiles.burningflipside.com/login.php?return='.$this->current_url());
-        }
-        else
-        {
-            $user = FlipSession::get_user();
             $secure_menu = array();
             for($i = 0; $i < $this->plugin_count; $i++)
             {
-                $ret = $this->plugins[$i]->get_secure_menu_entries($this, $user);
+                $ret = $this->plugins[$i]->get_secure_menu_entries($this, $this->user);
                 if($ret !== false)
                 {
                     $ret["<hr id='hr_$i'/>"] = false;
@@ -71,14 +66,7 @@ class SecurePage extends FlipPage
             }
             array_pop($secure_menu);
             $this->add_link('Secure', 'https://secure.burningflipside.com/', $secure_menu);
-            $this->add_link('Logout', 'http://profiles.burningflipside.com/logout.php');
         }
-        $about_menu = array(
-            'Burning Flipside'=>'http://www.burningflipside.com/about/event',
-            'AAR, LLC'=>'http://www.burningflipside.com/LLC',
-            'Privacy Policy'=>'http://www.burningflipside.com/about/privacy'
-        );
-        $this->add_link('About', 'http://www.burningflipside.com/about', $about_menu);
     }
 
     function get_secure_child_entry_points()
