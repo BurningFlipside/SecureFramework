@@ -1,9 +1,12 @@
 <?php
 require_once('class.FlipPage.php');
 require_once('class.FlipSession.php');
+require_once('class.SecurePlugin.php');
 class SecurePage extends FlipPage
 {
     public $secure_root;
+    protected $plugins;
+    protected $plugin_count;
 
     function __construct($title)
     {
@@ -13,9 +16,24 @@ class SecurePage extends FlipPage
         $this->secure_root = substr($script_dir, strlen($root));
         $this->add_secure_css();
         $this->add_secure_script();
-        $this->add_links();
         $this->add_login_form();
         $this->body_tags='data-login-url="'.$this->secure_root.'/api/v1/login"';
+        $plugin_files = glob('*/plugin.php');
+        $count = count($plugin_files);
+        for($i = 0; $i < $count; $i++)
+        {
+            include($plugin_files[$i]);
+        }
+        $this->plugins = array();
+        foreach(get_declared_classes() as $class)
+        {
+            if(is_subclass_of($class, 'SecurePlugin'))
+            {
+                $this->plugins[] = new $class();
+            }
+        }
+        $this->plugin_count = count($this->plugins);
+        $this->add_links();
     }
 
     function add_secure_css()
@@ -36,14 +54,18 @@ class SecurePage extends FlipPage
         }
         else
         {
-            $secure_menu = array(
-                'Tickets'=>'/tickets/index.php',
-                'View Registrations'=>'/register/view.php',
-                'Theme Camp Registration'=>'/register/tc_reg.php',
-                'Art Project Registration'=>'/register/art_reg.php',
-                'Art Car Registration'=>'/register/artCar_reg.php',
-                'Event Registration'=>'/register/event_reg.php'
-            );
+            $user = FlipSession::get_user();
+            $secure_menu = array();
+            for($i = 0; $i < $this->plugin_count; $i++)
+            {
+                $ret = $this->plugins[$i]->get_secure_menu_entries($this, $user);
+                if($ret !== false)
+                {
+                    $ret["<hr id='hr_$i'/>"] = false;
+                    $secure_menu = array_merge($secure_menu, $ret);
+                }
+            }
+            array_pop($secure_menu);
             $this->add_link('Secure', 'https://secure.burningflipside.com/', $secure_menu);
             $this->add_link('Logout', 'http://profiles.burningflipside.com/logout.php');
         }
@@ -53,6 +75,20 @@ class SecurePage extends FlipPage
             'Privacy Policy'=>'http://www.burningflipside.com/about/privacy'
         );
         $this->add_link('About', 'http://www.burningflipside.com/about', $about_menu);
+    }
+
+    function get_secure_child_entry_points()
+    {
+        $entry_points = '';
+        for($i = 0; $i < $this->plugin_count; $i++)
+        {
+            $ret = $this->plugins[$i]->get_plugin_entry_point();
+            if($ret !== false)
+            {
+                $entry_points .= '<li>'.$this->create_link($ret['name'],$ret['link']).'</li>';
+            }
+        }
+        return $entry_points;
     }
 }
 ?>
