@@ -13,7 +13,6 @@ class SecurePage extends FlipPage
         $this->secure_root = substr($script_dir, strlen($root));
         $this->add_secure_css($this->secure_root);
         $this->add_secure_script($this->secure_root);
-        $this->add_sites();
         $this->add_links();
         $this->add_login_form();
         $this->body_tags='data-login-url="'.$this->secure_root.'/api/v1/login"';
@@ -32,14 +31,6 @@ class SecurePage extends FlipPage
         $this->add_js(JS_BOOTSTRAP_FH);
         $this->add_js(JS_BOOTSTRAP_SW);
         $this->add_js(JS_LOGIN);
-    }
-
-    function add_sites()
-    {
-        $this->add_site('Profiles', 'http://profiles.burningflipside.com');
-        $this->add_site('WWW', 'http://www.burningflipside.com');
-        $this->add_site('Pyropedia', 'http://wiki.burningflipside.com');
-        $this->add_site('Secure', 'https://secure.burningflipside.com');
     }
 
     function add_links()
