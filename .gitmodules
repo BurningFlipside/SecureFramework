@@ -4,3 +4,6 @@
 [submodule "register"]
 	path = register
 	url = git@gitlab.com:BurningFlipside/RegistrationSystem.git
+[submodule "fvs"]
+	path = fvs
+	url = git@gitlab.com:BurningFlipside/FlipsideVolunteerSystem.git
