@@ -1,34 +1,49 @@
-function login_submit_done(data)
+function login_submit_done(jqXHR)
 {
-    if(data.error)
+    console.log(jqXHR);
+    if(jqXHR.status != 200)
     {
-         var failed = getParameterByName('failed')*1;
-         var return_val = window.location;
-         failed++;
-         if(data.return)
-         {
-             return_val = data.return;
-         }
-         window.location = 'https://profiles.burningflipside.com/login.php?failed='+failed+'&return='+return_val;
+        var failed = getParameterByName('failed')*1;
+        var return_val = window.location;
+        failed++;
+        //window.location = 'https://profiles.burningflipside.com/login.php?failed='+failed+'&return='+return_val;
     }
     else
     {
-        if(data.return)
-        {
-            window.location = data.return;
-        }
+        if(jqXHR.responseJSON !== undefined)
+	{
+            var data = jqXHR.responseJSON;
+	    var url  = '';
+	    if(data.return)
+	    {
+                url = data.return;
+	    }
+	    else
+	    {
+                url = window.location;
+	    }
+            if(data.extended)
+            {
+                url += '?extended='+data.extended;
+            }
+	    window.location = url;
+	}
     }
 }
 
 function login_submitted(form)
 {
+    var dir  = $('script[src*=login]').attr('src');
+    var name = dir.split('/').pop();
+    dir = dir.replace('/'+name,"");
+    name = dir.split('/').pop();
+    dir = dir.replace('/'+name,"");
     $.ajax({
-        url: 'https://profiles.burningflipside.com/ajax/login.php',
+        url: dir+'/api/v1/login',
         data: $(form).serialize(),
         type: 'post',
         dataType: 'json',
-        xhrFields: {withCredentials: true},
-        success: login_submit_done});
+        complete: login_submit_done});
 }
 
 function login_dialog_shown()
@@ -41,6 +56,11 @@ function do_login_init()
     var login_link = $(".links a[href*='login']");
     if(browser_supports_cors())
     {
+        login_link.attr('data-toggle','modal');
+        login_link.attr('data-target','#login-dialog');
+        login_link.removeAttr('href');
+        login_link.css('cursor', 'pointer');
+        login_link = $("#content a[href*='login']");
         login_link.attr('data-toggle','modal');
         login_link.attr('data-target','#login-dialog');
         login_link.removeAttr('href');
