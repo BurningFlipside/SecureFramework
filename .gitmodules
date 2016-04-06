@@ -1,9 +1,9 @@
 [submodule "tickets"]
 	path = tickets
-	url = git@gitlab.com:BurningFlipside/TicketSystem.git
+	url = https://github.com/BurningFlipside/Tickets.git
 [submodule "register"]
 	path = register
-	url = git@gitlab.com:BurningFlipside/RegistrationSystem.git
+	url = https://github.com/BurningFlipside/Registration.git
 [submodule "fvs"]
 	path = fvs
-	url = git@gitlab.com:BurningFlipside/FlipsideVolunteerSystem.git
+	url = https://github.com/BurningFlipside/VolunteerSystem.git
