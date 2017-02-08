@@ -12,5 +12,5 @@ $page->body .= '
     <ul>'.$page->get_secure_child_entry_points().'</ul>
 </div>';
 
-$page->print_page();
+$page->printPage();
 ?>

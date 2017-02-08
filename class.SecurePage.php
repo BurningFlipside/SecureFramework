@@ -18,6 +18,10 @@ class SecurePage extends FlipPage
         {
             $this->secure_root = '/';
         }
+        else if($this->secure_root[strlen($this->secure_root)-1] !== '/')
+        {
+            $this->secure_root.='/';
+        }
         $this->add_secure_css();
         $this->add_secure_script();
         $this->add_login_form();
@@ -42,12 +46,12 @@ class SecurePage extends FlipPage
 
     function add_secure_css()
     {
-        $this->add_css_from_src($this->secure_root.'css/secure.css');
+        $this->addCSSByURI($this->secure_root.'css/secure.css');
     }
 
     function add_secure_script()
     {
-        $this->add_js(JS_LOGIN);
+        $this->addWellKnownJS(JS_LOGIN);
     }
 
     function add_links()
@@ -65,7 +69,7 @@ class SecurePage extends FlipPage
                 }
             }
             array_pop($secure_menu);
-            $this->add_link('Secure', 'https://secure.burningflipside.com/', $secure_menu);
+            $this->addLink('Secure', 'https://secure.burningflipside.com/', $secure_menu);
         }
     }
 
