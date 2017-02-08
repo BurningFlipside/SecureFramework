@@ -81,7 +81,7 @@ class SecurePage extends FlipPage
             $ret = $this->plugins[$i]->get_plugin_entry_point();
             if($ret !== false)
             {
-                $entry_points .= '<li>'.$this->create_link($ret['name'],$ret['link']).'</li>';
+                $entry_points .= '<li>'.$this->createLink($ret['name'],$ret['link']).'</li>';
             }
         }
         return $entry_points;
