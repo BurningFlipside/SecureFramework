@@ -20,7 +20,7 @@ class SecurePage extends FlipPage
         }
         else if($this->secure_root[strlen($this->secure_root)-1] !== '/')
         {
-            $this->secure_root.='/';
+            $this->secure_root.= '/';
         }
         $this->add_secure_css();
         $this->add_secure_script();
