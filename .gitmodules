@@ -7,3 +7,6 @@
 [submodule "fvs"]
 	path = fvs
 	url = https://github.com/BurningFlipside/VolunteerSystem.git
+[submodule "themes"]
+	path = themes
+	url = https://github.com/BurningFlipside/ThemeRegistration.git
