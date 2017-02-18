@@ -41,6 +41,7 @@ class SecurePage extends FlipPage
             }
         }
         $this->plugin_count = count($this->plugins);
+        $this->secureUrl = $this->settings->getGlobalSetting('secure_url', 'https://secure.burningflipside.com');
         $this->add_links();
     }
 
@@ -69,7 +70,7 @@ class SecurePage extends FlipPage
                 }
             }
             array_pop($secure_menu);
-            $this->addLink('Secure', 'https://secure.burningflipside.com/', $secure_menu);
+            $this->addLink('Secure', $this->secureUrl, $secure_menu);
         }
     }
 
