@@ -1,33 +1,32 @@
 function login_submit_done(jqXHR)
 {
-    console.log(jqXHR);
     if(jqXHR.status != 200)
     {
         var failed = getParameterByName('failed')*1;
         var return_val = window.location;
         failed++;
-        //window.location = 'https://profiles.burningflipside.com/login.php?failed='+failed+'&return='+return_val;
+        window.location = window.loginUrl+'?failed='+failed+'&return='+return_val;
     }
     else
     {
         if(jqXHR.responseJSON !== undefined)
-	{
+        {
             var data = jqXHR.responseJSON;
-	    var url  = '';
-	    if(data.return)
-	    {
+            var url  = '';
+            if(data.return)
+            {
                 url = data.return;
-	    }
-	    else
-	    {
+            }
+            else
+            {
                 url = window.location;
-	    }
+            }
             if(data.extended)
             {
                 url += '?extended='+data.extended;
             }
-	    window.location = url;
-	}
+            window.location = url;
+        }
     }
 }
 
