@@ -7,7 +7,6 @@ class SecurePage extends FlipPage
     public $secure_root;
     protected $plugins;
     protected $plugin_count;
-    protected $secureUrl;
 
     function __construct($title)
     {
