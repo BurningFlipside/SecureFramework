@@ -15,6 +15,7 @@ class SecurePage extends FlipPage
         $root = $_SERVER['DOCUMENT_ROOT'];
         $script_dir = dirname(__FILE__);
         $this->secure_root = substr($script_dir, strlen($root));
+
         if($this->secure_root === false || strlen($this->secure_root) === 0)
         {
             $this->secure_root = '/';
@@ -42,7 +43,6 @@ class SecurePage extends FlipPage
             }
         }
         $this->plugin_count = count($this->plugins);
-        $this->secureUrl = $this->settings->getGlobalSetting('secure_url', 'https://secure.burningflipside.com');
         $this->add_links();
     }
 
