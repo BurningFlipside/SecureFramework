@@ -5,6 +5,8 @@
   php_value include_path ".:/var/www/common"
 </IfModule>
 
-AddType image/vnd.microsoft.icon .ico
-ExpiresActive on
-ExpiresByType image/vnd.microsoft.icon "access plus 3 months"
+<IfModule mod_expires.c>
+  AddType image/vnd.microsoft.icon .ico
+  ExpiresActive on
+  ExpiresByType image/vnd.microsoft.icon "access plus 3 months"
+</IfModule>
