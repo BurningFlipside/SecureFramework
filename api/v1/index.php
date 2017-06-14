@@ -6,6 +6,6 @@ require('Autoload.php');
 require('class.SecureAPI.php');
 
 $site = new \Http\WebSite();
-$site->registerAPI('/', new SecureAPI());
+$site->registerAPI('', new SecureAPI());
 $site->run();
 /* vim: set tabstop=4 shiftwidth=4 expandtab: */
