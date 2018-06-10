@@ -1,6 +1,5 @@
 <?php
-require_once('class.FlipPage.php');
-require_once('class.FlipSession.php');
+require_once('Autoload.php');
 require_once('class.SecurePlugin.php');
 
 trait SecureWebPage
@@ -20,16 +19,6 @@ trait SecureWebPage
             $ret .= '/';
         }
         return $ret;
-    }
-
-    protected function addSecureCss()
-    {
-        $this->addCSSByURI($this->secure_root.'css/secure.css');
-    }
-
-    protected function addSecureScript()
-    {
-        $this->addWellKnownJS(JS_LOGIN);
     }
 
     protected function loadAndGetPlugins()
@@ -60,16 +49,14 @@ trait SecureWebPage
             $ret = $plugins[$i]->get_secure_menu_entries($this, $this->user);
             if($ret !== false)
             {
-                $ret["<hr id='hr_$i'/>"] = false;
                 $secure_menu = array_merge($secure_menu, $ret);
             }
         }
-        array_pop($secure_menu);
-        $this->addLink('Secure', $this->secureUrl, $secure_menu);
+        $this->addLink('Secure', $this->secure_root, $secure_menu);
     }
 }
 
-class SecurePage extends FlipPage
+class SecurePage extends \Http\WebPage
 {
     use SecureWebPage;
 
@@ -81,13 +68,12 @@ class SecurePage extends FlipPage
     {
         parent::__construct($title, true);
         $this->secure_root = $this->getSecureRoot();
-        $this->addSecureCss();
-        $this->addSecureScript();
-        $this->add_login_form();
-        $this->body_tags='data-login-url="'.$this->secure_root.'api/v1/login"';
         $this->plugins = $this->loadAndGetPlugins();
         $this->plugin_count = count($this->plugins);
         $this->add_links();
+        $this->content['root'] = $this->secure_root;
+        $this->addTemplateDir(dirname(__FILE__).'/templates', 'Secure');
+        $this->setTemplateName('@Secure/main.html');
     }
 
     function add_links()
@@ -106,7 +92,7 @@ class SecurePage extends FlipPage
             $ret = $this->plugins[$i]->get_plugin_entry_point();
             if($ret !== false)
             {
-                $entry_points .= '<li>'.$this->createLink($ret['name'],$ret['link']).'</li>';
+                $entry_points .= '<li><a href="'.$ret['link'].'">'.$ret['name'].'</a></li>';
             }
         }
         return $entry_points;

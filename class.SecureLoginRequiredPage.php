@@ -1,7 +1,7 @@
 <?php
 require_once('class.LoginRequiredPage.php');
 require_once('class.SecurePage.php');
-class SecureLoginRequiredPage extends LoginRequiredPage
+class SecureLoginRequiredPage extends \Http\LoginRequiredPage
 {
     use SecureWebPage;
 
@@ -13,10 +13,6 @@ class SecureLoginRequiredPage extends LoginRequiredPage
     {
         parent::__construct($title, true);
         $this->secure_root = $this->getSecureRoot();
-        $this->addSecureCss();
-        $this->addSecureScript();
-        $this->add_login_form();
-        $this->body_tags='data-login-url="'.$this->secure_root.'api/v1/login"';
         $this->plugins = $this->loadAndGetPlugins();
         $this->plugin_count = count($this->plugins);
         $this->add_links();
