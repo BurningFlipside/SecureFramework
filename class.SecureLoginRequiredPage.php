@@ -16,6 +16,9 @@ class SecureLoginRequiredPage extends \Http\LoginRequiredPage
         $this->plugins = $this->loadAndGetPlugins();
         $this->plugin_count = count($this->plugins);
         $this->add_links();
+        $this->content['root'] = $this->secure_root;
+        $this->addTemplateDir(dirname(__FILE__).'/templates', 'Secure');
+        $this->setTemplateName('@Secure/main.html');
     }
 
     function add_links()
