@@ -1,5 +1,4 @@
 <?php
-require_once('class.LoginRequiredPage.php');
 require_once('class.SecurePage.php');
 class SecureLoginRequiredPage extends \Http\LoginRequiredPage
 {
