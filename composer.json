@@ -1,5 +1,5 @@
 {
-    "name": "BurningFlipside/SecureFramework",
+    "name": "burningflipside/secureframework",
     "version": "1.0.0",
     "repositories": [
         {
@@ -8,6 +8,6 @@
         }
     ],
     "require": {
-        "BurningFlipside/CommonCode": "dev-master"
+        "burningflipside/commoncode": "dev-master"
     }
 }
