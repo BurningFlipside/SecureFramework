@@ -56,7 +56,7 @@ trait SecureWebPage
     }
 }
 
-class SecurePage extends \Http\WebPage
+class SecurePage extends \Flipside\Http\WebPage
 {
     use SecureWebPage;
 
