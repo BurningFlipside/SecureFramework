@@ -1,6 +1,6 @@
 <?php
 require_once('class.SecurePage.php');
-class SecureLoginRequiredPage extends \Http\LoginRequiredPage
+class SecureLoginRequiredPage extends \Flipside\Http\LoginRequiredPage
 {
     use SecureWebPage;
 
