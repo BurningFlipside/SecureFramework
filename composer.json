@@ -9,5 +9,10 @@
     ],
     "require": {
         "burningflipside/commoncode": "dev-master"
+    },
+    "autoload": {
+	"psr-4": {
+            "Flipside\\Secure\\": ""
+	}
     }
 }
