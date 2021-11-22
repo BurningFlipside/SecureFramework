@@ -1,5 +1,5 @@
 <?php
-class SecureAPI extends Http\Rest\RestAPI
+class SecureAPI extends Flipside\Http\Rest\RestAPI
 {
     public function setup($app)
     {
@@ -14,7 +14,7 @@ class SecureAPI extends Http\Rest\RestAPI
         {
             return $response->withStatus(400);
         }
-        $auth = AuthProvider::getInstance();
+        $auth = \Flipside\AuthProvider::getInstance();
         $res = $auth->login($params['username'], $params['password']);
         if($res === false)
         {
@@ -28,7 +28,7 @@ class SecureAPI extends Http\Rest\RestAPI
 
     public function logout($request, $response, $args)
     {
-        FlipSession::end();
+        \Flipside\FlipSession::end();
         return $response->withJson(true);
     }
 }

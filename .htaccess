@@ -10,3 +10,6 @@
   ExpiresActive on
   ExpiresByType image/vnd.microsoft.icon "access plus 3 months"
 </IfModule>
+
+RewriteEngine On
+RewriteRule ^fvs2.*$ https://secure.burningflipside.com/fvs/ [R=301,L]
