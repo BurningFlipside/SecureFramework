@@ -9,5 +9,15 @@
     <li><a href="https://www.google.com/chrome">Download Chrome</a></li>
     <li><a href="http://www.apple.com/safari/download/">Download Safari</a></li>
     <li><a href="http://www.opera.com/download/">Download Opera</a></li>
-    <li><a href="http://windows.microsoft.com/en-US/internet-explorer/downloads/ie/">Download Internet Explorer</a></li>
+    <li><a href="https://www.microsoft.com/en-us/edge/business/download">Download Edge</a></li>
 </ul>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-64901342-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
