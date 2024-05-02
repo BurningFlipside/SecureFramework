@@ -33,7 +33,7 @@ trait SecureWebPage
         $ret = array();
         foreach(get_declared_classes() as $class)
         {
-            if(is_subclass_of($class, 'SecurePlugin'))
+            if(is_subclass_of($class, '\Flipside\Secure\SecurePlugin'))
             {
                 $ret[] = new $class();
             }
