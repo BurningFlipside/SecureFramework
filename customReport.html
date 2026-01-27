@@ -1,0 +1,47 @@
+<html>
+    <head>
+        <title>Burning Flipside - Secure Sites Custom Reports</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+        <script src="https://browser.sentry-cdn.com/7.51.2/bundle.tracing.replay.min.js" integrity="sha384-iLKXUltZMdRclD0006ecT9UNh3cV0kh8EH/2ismU+XnEmyK1qyDwxA+RIfXUU8Qn" crossorigin="anonymous"></script>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+        <script src="/js/customReportBundle.js"></script>
+        <script src="/js/modal.js"></script>
+        <link rel="stylesheet" href="https://unpkg.com/tabulator-tables@6.2.1/dist/css/tabulator.min.css">
+        <script type="text/javascript" src="https://unpkg.com/tabulator-tables@6.2.1/dist/js/tabulator.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/6.0.0/bootbox.js" integrity="sha512-kwtW9vT4XIHyDa+WPb1m64Gpe1jCeLQLorYW1tzT5OL2l/5Q7N0hBib/UNH+HFVjWgGzEIfLJt0d8sZTNZYY6Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/all.min.css" crossorigin="anonymous">
+                        
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    </head>
+    <body>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light" id="mainNav">
+            <a class="navbar-brand" href="#">
+              <picture>
+                <source srcset="/img/common/logo.svg" style="width: 30px; height:30px">
+                <img alt="Burning Flipside" src="/img/common/logo.png" style="width: 30px; height:30px">
+              </picture>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">API</a>
+                        <ul class="dropdown-menu" id="apiMenu">
+                        </ul>
+                    </li>
+                    <li class="nav-item" id="endpointSelect">
+                    </li>
+                </ul>
+            <div class="flex-grow-1 text-right d-flex justify-content-end">
+            </div>
+          </div>
+        </nav>
+        <div id="content" class="container-fluid">
+
+        </div>
+    </body>
+</html>
