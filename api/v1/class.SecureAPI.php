@@ -5,6 +5,8 @@ class SecureAPI extends Flipside\Http\Rest\RestAPI
     {
         $app->post('/login[/]', array($this, 'login'));
         $app->post('/logout[/]', array($this, 'logout'));
+        $app->get('/me[/]', array($this, 'me'));
+        $app->get('/groups[/]', array($this, 'getGroups'));
     }
 
     public function login($request, $response, $args)
@@ -30,6 +32,21 @@ class SecureAPI extends Flipside\Http\Rest\RestAPI
     {
         \Flipside\FlipSession::end();
         return $response->withJson(true);
+    }
+
+    public function me($request, $response, $args)
+    {
+        $this->validateLoggedIn($request);
+        $user = $this->user;
+        return $response->withJson($user);
+    }
+
+    public function getGroups($request, $response, $args)
+    {
+        $this->validateLoggedIn($request);
+        $user = $this->user;
+        $groups = $user->getGroups();
+        return $response->withJson($groups);
     }
 }
 /* vim: set tabstop=4 shiftwidth=4 expandtab: */
